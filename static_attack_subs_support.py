@@ -4,12 +4,12 @@ Created on Thu Mar 16 14:22:18 2017
 
 @author: saqibhasan
 
-This code is used to identify the transmission lines and its associated protection assembly that cause the worst load loss by using 
-greedy hueristics. It is an extended version of greedy_algorithm.py
-
+This code is used to identify the transmission lines and its associated protection assembly that cause the worst load loss.
 """
 
 def greedy_hueristics(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name, l_budget):
+    
+    # Importing supporting methods a nd initializing method variables
     import cascade_algorithm
     import maptest_new_outage_list
     import cascade_algorithm_reduced_outages
@@ -17,19 +17,24 @@ def greedy_hueristics(filepath, comp_filename, load_file_name, start_range, cont
     tot_exe_time_start = time.time()
     temp_max_loadloss = 0;
     worst_case_outage = [];
+    
+    # Identifying the maximum damage causing transmission line from the system model 
     max_load_loss_outage, max_loadloss = cascade_algorithm.DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name);
-#    print max_load_loss_outage
     temp_max_loadloss = max_loadloss;
-    worst_case_outage = max_load_loss_outage;  
+    worst_case_outage = max_load_loss_outage; 
+    # Iteratively identifying the next combination of transmission lines that maximize system damage based on budget constraints
     for k in range(0, (l_budget-1)):
+        # generating new attack space
         new_outage_list = maptest_new_outage_list.maptest14bus_test_system(comp_filename, start_range, contingency_range, max_load_loss_outage);
-#        print new_outage_list
+        # Identifying the new worst case attack
         max_load_loss_outage, max_loadloss = cascade_algorithm_reduced_outages.DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name, new_outage_list);
+        # updating the solution if damage is maximized
         if (max_loadloss > temp_max_loadloss):
             temp_max_loadloss = max_loadloss;
             worst_case_outage = max_load_loss_outage;
     tot_exe_time_end = time.time()
     tot_exe_time = (tot_exe_time_end - tot_exe_time_start)
+    # Outputing the details on the console
     print '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
     print 'Worst case outage: %s' %worst_case_outage
     print 'Worst case loadloss: %s' %temp_max_loadloss
