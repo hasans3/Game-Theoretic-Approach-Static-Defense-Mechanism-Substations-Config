@@ -7,7 +7,7 @@ Created on Thu Jun 22 17:08:17 2017
 def maptest14bus_test_system(comp_filename, start_range, contingency_range, substation_name):
     
     valueset = [];
-# -------------- Open and read the text file and convert the content into a list ----------------    
+# -------------- Open and read the text file and convert the content into a dictionary ----------------    
     data_file = open(comp_filename, 'r'); 
     line_data = data_file.readline();
     valueset = eval(line_data);
@@ -15,9 +15,8 @@ def maptest14bus_test_system(comp_filename, start_range, contingency_range, subs
     print valueset
     print len(valueset)
     print len(substation_name)
-#    for item in range(0, len(pro_subs)):
-#        if pro_subs[item] in valueset:
-#            del valueset[pro_subs[item]];
+
+    # Remove substations from the system model
     for item in range(0, len(substation_name)):
         if substation_name[item] in valueset:
             del valueset[substation_name[item]];
