@@ -4,12 +4,13 @@ Created on Thu Mar 23 12:50:11 2017
 
 @author: saqibhasan
 
-This code is used to identify the transmission lines and its associated protection assembly that cause the worst load loss by using 
-greedy hueristics. It is an extended version of greedy_algorithm_v1.py
+This code is used to identify the transmission lines and its associated protection assembly that cause the worst load loss.
 
 """
 
 def greedy_hueristics(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name, budget, PA_name_file):
+    
+    # Importing supporting methods and initializing method variables
     import cascade_algorithm
     import maptest_new_outage_list
     import cascade_algorithm_reduced_outages
