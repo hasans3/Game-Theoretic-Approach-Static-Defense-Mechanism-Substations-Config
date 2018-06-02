@@ -4,8 +4,7 @@ Created on Thu Jun 22 16:47:01 2017
 
 @author: saqibhasan
 
-This code is used to identify the transmission lines and its associated protection assembly that cause the worst load loss by using 
-greedy hueristics. It includes the substation configuration. It is an extended version of greedy_algorithm.py
+This code is used to identify the transmission lines and its associated protection assembly that cause the worst load loss.
 
 """
 
