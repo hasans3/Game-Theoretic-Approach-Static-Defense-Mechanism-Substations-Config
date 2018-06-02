@@ -11,19 +11,11 @@ file name- greedy_algorithm.py
 
 def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name):
     
-# complete path of the dss file
-# range of n-k contingency
-# blackout_criterion in numbers
-# name of topology for generated xml
-    
-# Setting up the com interface and the necessary files    
+# Setting up the com interface and the necessary library files and methods    
     import win32com.client
-#    import maptest_testing
     import load_maptest14bus1
     import numpy as np
     from xml.dom import minidom
-#    import matplotlib.pyplot as plt
-#    from compiler.ast import flatten
     import time
 # ----------------- Instantiate the OpenDSS Object -------------------------
     total_execution_time_start = time.time()
@@ -46,15 +38,11 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
     DSSText.Command = "Compile " + filepath;
     print("File compiled successfully")
 
-# -------------------------------- Getting the contingency range -------------------------------
+# -------------------------------- Getting the contingencies -------------------------------
     contingencies = comp_filename;
-#    contingencies = maptest_testing.maptest14bus_test_system(comp_filename, start_range, contingency_range);
-#    contingencies = [[['Line.tl611','Line.tl1617','Line.tl414']]]
     num_n_minus_k_contingencies = len(contingencies);
-#    Z_values_final = list(flatten(Z_values))
-#    Median= 'Median:' + str(Median_Z);
 
-# ----------------------- Lists and variable initialization ------------------------
+# ----------------------- Method variables initialization ------------------------
     LC = [];
     load_c = [];
     load_loss = [];
@@ -72,7 +60,6 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
     max_load_loss = 0;
     selected_outage = [];
     selected_outage_new = [];
-#    blackout_list = [];
     
 # Getting current values of each line and setting up the maximum threshold
     while(iLines > 0):
@@ -89,8 +76,7 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
         normal_line_curr_values.append(tuple(line_curr_values));
         maxcurline_limit1.append(tuple(maxcurline_limit));
         iLines = DSSCircuit.NextPDElement();
-    #print "Line_Currents: %s" %normal_line_curr_values
-    #print "Maximum line current limit: %s" %maxcurline_limit1
+
 # --------------code for xml generation---------------------------- 
     root = minidom.Document();
     root_element = root.createElement('Contingencies');
@@ -117,7 +103,6 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
             print "------------------------------------------------------------------------------------------------------"
             print "Calling Solver"
             Total_line_loss_counter = len(contingency[j]);
-#            contingency[j] = ['Line.tl49','Line.tl85']
 #     --------------code for xml generation----------------------------------           
             my_path = root.createElement('Path');
             my_initial_outage = root.createElement('Initial_Stage');
@@ -136,6 +121,7 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
                 my_outage.appendChild(my_outage_text);
 #     -----------------------------------------------------------------------                
             print "Initial outage: %s" %initial_loss
+    
 # Solving the circuit and updating line current values after initial outages
             DSSSolution.Solve();
             iLines = DSSCircuit.FirstPDElement();
@@ -186,8 +172,8 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
                         my_stage_num.appendChild(my_outage);
                     my_cascading_outage.appendChild(my_stage_num);
 #     ------------------------------------------------------------------------------ 
-# Solving the circuit and updating line currents after removal of overloaded lines
-# to check for further overload                    
+
+# Solving the circuit and updating line currents after removal of overloaded lines to check for further overload                    
                 DSSSolution.Solve();
                 iLines = DSSCircuit.FirstPDElement();
                 normal_line_curr_values = [];
@@ -254,7 +240,7 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
             final_load_loss_list.append(perct_load_loss);
             print "Number of stages of failure = %s " %(stagecounter-1)
             print "Total number of components failed = %s " %Total_line_loss_counter
-#    ----------------- Resetting the simulation back to normal -----------------------
+#    ----------------- Resetting the system model back to its norminal state -----------------------
             DSSText.Command = "Compile " + filepath;
 #    ---------------------------- code for xml generation -------------------------------
             mykcontingency.appendChild(my_path);
@@ -273,17 +259,7 @@ def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, 
     total_execution_time = (total_execution_time_end - total_execution_time_start)
 #    print 'Total execution time in seconds: %s' %total_execution_time
     return (selected_outage_new, max_load_loss) 
-#    print 'Median: %s' %Median_Z;
-#    print Median
-#    ax = plt.gca();
-#    plt.text(.15, .9, '$%s$' %(Median),horizontalalignment='center', verticalalignment='center',transform = ax.transAxes)
-#    plt.xlabel('Line Impedance (Ohms)')
-#    plt.ylabel('Load Loss (KW)')
-#    plt.title('N-%s Contingency Analysis' %contingency_range)
-#    plt.plot(Z_values_final, final_load_loss_list, 'ro')
-#    plt.grid(True)
-#    return blackout_list
-#    plt.savefig("G:\\saqib\\open DSS\\OpenDSS_Python_Interface\\figures\\14_bus_N-5.pdf")
+
 #    ------------------------------------------------------------------------------------            
 #DSS_Python_Interface1("'G:\saqib\open DSS\OpenDSS_Python_Interface\ieee39bus_system\ieee39bus_system_with_1kv_base.dss'", "G:\saqib\open DSS\OpenDSS_Python_Interface\ieee39bus_system\component_data.txt", "G:\saqib\open DSS\OpenDSS_Python_Interface\ieee39bus_system\Load_data1.txt", 3, 40, 'ieee39bus_system_test_N-3.xml');
 #DSS_Python_Interface1("'G:\saqib\open DSS\opendss_matlab_interface\ieee9bus_system.dss'", "G:\saqib\open DSS\OpenDSS_Python_Interface\ieee_9_bus_data\component_data_heuristics.txt", "G:\saqib\open DSS\OpenDSS_Python_Interface\ieee_9_bus_data\Load_data_with_reactive_load.txt", 0, 1, 40, 'wscc9bus_system_test_N-1.xml'); 
