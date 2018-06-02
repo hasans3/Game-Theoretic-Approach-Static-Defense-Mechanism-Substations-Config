@@ -5,7 +5,8 @@ Created on Thu Jun 22 17:09:46 2017
 @author: saqibhasan
 """
 def maptest14bus_test_system(comp_filename, start_range, contingency_range, selected_item, substation_names):
-    
+
+# ----------------------- Importing method from library and intializing method variables -------------------
     from  more_itertools import unique_everseen
     valueset = [];
     sub_items = {};
@@ -16,12 +17,11 @@ def maptest14bus_test_system(comp_filename, start_range, contingency_range, sele
     line_data = data_file.readline();
     valueset = eval(line_data);
     data_file.close()
-#    for item in range(0, len(pro_subs_name)):
-#        if pro_subs_name[item] in valueset:
-#            del valueset[pro_subs_name[item]];
+# ---------------- Removing the selcted substations from the system model ---------------------
     for item in range(0, len(substation_names)):
         if substation_names[item] in valueset:
             del valueset[substation_names[item]];
+# --------------------- Generating new attack space --------------------------
     for t in range(0, len(selected_item)):
         if selected_item[t] in valueset:
             temp_sub_item_values = temp_sub_item_values + valueset[selected_item[t]];
