@@ -5,23 +5,26 @@ Created on Fri Jun 16 12:25:30 2017
 @author: saqibhasan
 """
 def maptest14bus_test_system(comp_filename, start_range, contingency_range, selected_item, substation_names, pro_subs_name):
-    
+  
+# --------------- Import the supporting library methods and intitialize the method variables -----------------
     from  more_itertools import unique_everseen
     valueset = [];
     sub_items = {};
     temp_valueset = {};
     temp_sub_item_values = [];
-# -------------- Open and read the text file and convert the content into a list ----------------    
+# -------------- Open and read the text file and convert the content into a dictionary ----------------    
     data_file = open(comp_filename, 'r'); 
     line_data = data_file.readline();
     valueset = eval(line_data);
     data_file.close()
+# ----------------- Remove the selected substations from the system model ---------------------
     for item in range(0, len(pro_subs_name)):
         if pro_subs_name[item] in valueset:
             del valueset[pro_subs_name[item]];
     for item in range(0, len(substation_names)):
         if substation_names[item] in valueset:
             del valueset[substation_names[item]];
+# ----------------- Generate new attack space --------------------------
     for t in range(0, len(selected_item)):
         if selected_item[t] in valueset:
             temp_sub_item_values = temp_sub_item_values + valueset[selected_item[t]];
