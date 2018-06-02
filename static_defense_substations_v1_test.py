@@ -61,17 +61,6 @@ def static_defense_subs(filepath, comp_filename, load_file_name, start_range, co
             sub_protected1 = []
             for item in sub_protected:
                 sub_protected1.append(item)
-#        post_defense_worst_case_outage, post_defense_worst_case_sub, post_defense_worst_case_loadloss = post_defense_static_attack_subs.greedy_hueristics(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name, p_budget, s_budget, sub_protected);
-#        if post_defense_worst_case_loadloss > prev_post_defese_loadloss: 
-#            sub_protected1.remove(temp_sub_protected);
-#        else:
-#            sub_protected1 = []
-#            for item in sub_protected:
-#                sub_protected1.append(item)
-#    print sub_protected1
-#    print sub_protected
-#        prev_post_defese_loadloss = post_defense_worst_case_loadloss
-#        print sub_protected 
 
     # Obtain the worst case static attack after protecting the substations based on the defense budget
     post_defense_worst_case_outage, post_defense_worst_case_sub, post_defense_worst_case_loadloss = post_defense_static_attack_subs.greedy_hueristics(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name, p_budget, s_budget, sub_protected1);
