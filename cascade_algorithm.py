@@ -4,9 +4,6 @@ Created on Fri Mar 03 14:09:15 2017
 
 @author: saqibhasan
 
-This code is a supporting cascade algorithm for the implemented greedy algorithm
-file name- greedy_algorithm.py
-
 """
 
 def DSS_Python_Interface1(filepath, comp_filename, load_file_name, start_range, contingency_range, blackout_criterion, system_name):
