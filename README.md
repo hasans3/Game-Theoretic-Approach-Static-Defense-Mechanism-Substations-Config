@@ -15,7 +15,8 @@ To run the attack method, the following steps are needed:
 1. `Install the OpenDSS` from  [Download Link](https://sourceforge.net/projects/electricdss/#Link) on the Windows machine as OpenDSS is not mac compatible.
 2. `Download and save` the system models from the "System Models" folder to the local drive. 
 3. `Install` Spyder, PyCharm or any other Python IDE.
-4. `Open` the `static_defense_substations_v1_test.py` method and set the paths for the `filepath, comp_filename, load_file_name` as per the 
+4. `Install` all the necessary inbuilt python packages using `pip install package name`. Example `pip install numpy`.
+5. `Open` the `static_defense_substations_v1_test.py` method and set the paths for the `filepath, comp_filename, load_file_name` as per the 
 directory where the downloaded files are stored from the "System Models" folder. 
 
 `filepath` is the path where `.dss` file is stored on the local drive.
