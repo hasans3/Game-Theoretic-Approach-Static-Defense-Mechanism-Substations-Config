@@ -25,7 +25,7 @@ directory where the downloaded files are stored from the "System Models" folder.
 
 `load_file_name` is the path for the `load_data.txt` file stored on the local drive. For certain models the file name can be `load_data1.txt` or `load_data_testing1.txt`, etc.
 
-5. Run `static_defense_substations_v1_test.py`.
+6. Run `static_defense_substations_v1_test.py`.
 
 ## Supporting Methods 
 1. `static_attack_subs_v2.py`
