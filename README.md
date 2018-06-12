@@ -14,9 +14,10 @@ The document will be available on Vanderbilt Universities, Institute for softwar
 To run the attack method, the following steps are needed:
 1. `Install the OpenDSS` from  [Download Link](https://sourceforge.net/projects/electricdss/#Link) on the Windows machine as OpenDSS is not mac compatible.
 2. `Download and save` the system models from the "System Models" folder to the local drive. 
-3. `Install` Spyder, PyCharm or any other Python IDE.
-4. `Install` all the necessary inbuilt python packages using `pip install package name`. Example `pip install numpy`.
-5. `Open` the `static_defense_substations_v1_test.py` method and set the paths for the `filepath, comp_filename, load_file_name` as per the 
+3. `Install` Python 2.7.
+4. `Install` Spyder, PyCharm or any other Python IDE.
+5. `Install` all the necessary inbuilt python packages using `pip install package name`. Example `pip install numpy`.
+6. `Open` the `static_defense_substations_v1_test.py` method and set the paths for the `filepath, comp_filename, load_file_name` as per the 
 directory where the downloaded files are stored from the "System Models" folder. 
 
 `filepath` is the path where `.dss` file is stored on the local drive.
@@ -25,7 +26,7 @@ directory where the downloaded files are stored from the "System Models" folder.
 
 `load_file_name` is the path for the `load_data.txt` file stored on the local drive. For certain models the file name can be `load_data1.txt` or `load_data_testing1.txt`, etc.
 
-6. Run `static_defense_substations_v1_test.py`.
+7. Run `static_defense_substations_v1_test.py`.
 
 ## Supporting Methods 
 1. `static_attack_subs_v2.py`
@@ -38,3 +39,14 @@ directory where the downloaded files are stored from the "System Models" folder.
 8. `post_defense_static_attack_subs.py`
 
 Each of these method have their own supporting methods that are not listed here.
+
+## Dependencies
+more-itertools 
+
+pywin32
+
+pypiwin32
+
+numpy
+
+To install dependencies: `pip install <dependencyname>`; ex: `pip install numpy`.
