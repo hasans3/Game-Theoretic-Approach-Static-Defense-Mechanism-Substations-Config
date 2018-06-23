@@ -11,7 +11,7 @@ The document is available on Vanderbilt Universities, Institute for software int
 
 ## How to run the main method `static_defense_substations_v1_test.py`?
   
-To run the attack method, the following steps are needed:
+To run the defense method, the following steps are needed:
 1. `Install the OpenDSS` from  [Download Link](https://sourceforge.net/projects/electricdss/#Link) on the Windows machine as OpenDSS is not mac compatible.
 2. `Download and save` the system models from the "System Models" folder to the local drive. 
 3. `Install` Python 2.7.
